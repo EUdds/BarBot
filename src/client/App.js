@@ -24,10 +24,10 @@ class App extends Component {
       <header className="App-header">
         <h1>BarBotUI</h1>
         <button className="btn"
-                onTouchStart={this.onToggleOn}
+                onClick={(e) => this.onToggleOn(e)}
         >On!</button>
         <button className="btn"
-                onTouchStart={this.onToggleOff}
+                onClick={(e) => this.onToggleOff(e)}
         >Off!</button>
       </header>
     </div>
