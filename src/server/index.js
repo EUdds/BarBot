@@ -8,8 +8,13 @@ const server = http.createServer(app);
 
 const io = SocketIO(server);
 
-io.origins('*:*');
-io.listen(7000);
+io.listen(7000, (err) => {
+    console.log(err);
+});
+
+io.httpServer.on('listening', function () {
+    console.log('listening on port', io.httpServer.address().port)
+})
 
 
 const gpiop = gpio.promise;
