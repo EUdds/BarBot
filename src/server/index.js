@@ -23,23 +23,32 @@ const webroot = __dirname + '/../';
 console.log('HERERE');
 app.use(express.static(webroot));
 
-const PUMP_1 = 2;
+const PUMP_1 = 7;
+const PUMP_2 = 11;
+const PUMP_3 = 13;
+const PUMP_4 = 15;
+const PUMP_5 = 12;
+const PUMP_6 = 16;
+/* TODO
+const PUMP_7 = 18;
+CONST PUMP_8 = 22;
+*/
 
-gpiop.setup(PUMP_1, gpio.DIR_OUT);
-
+gpiop.setup(PUMP_1, gpio.DIR_HIGH);
 io.sockets.on('connection', function(socket) {
     let state = 'on';
+    gpio.write(PUMP_1, true);
 
     socket.on('state', function(data) {
         state = data;
         console.log(state);
 
         if(state === 'on') {
-            gpio.write(PUMP_1, true);
+            gpio.write(PUMP_1, false);
         } else if (state === 'off') {
-            gpio.write(PUMP_1, false);
+            gpio.write(PUMP_1, true);
         } else {
-            gpio.write(PUMP_1, false);
+            gpio.write(PUMP_1, true);
         }
     });
 });

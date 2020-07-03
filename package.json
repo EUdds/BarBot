@@ -32,7 +32,7 @@
     "postinstall": "install-app-deps"
   },
   "homepage": "./",
-  "main": "src/start.js",
+  "main": "src/main.js",
   "eslintConfig": {
     "extends": "react-app"
   },
