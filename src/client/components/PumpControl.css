@@ -1,0 +1,26 @@
+.pumpControl {
+    width: auto;
+    height: auto;
+}
+
+.btn {
+    display: block;
+    background-color: #333;
+    width: 75px;
+    height: 75px;
+    border: 0;
+    margin: 10px auto;
+    color: #fff;
+    font-size: 2.5rem;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;          /* Likely future */
+    padding: 0;
+    text-align: center;
+  }
+  
+  .btn:hover {
+    background-color: #999;
+  }
+  

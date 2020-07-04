@@ -13,7 +13,7 @@ function createWindow () {
 
   // and load the index.html of the app.
   mainWindow.setFullScreen(true);
-  mainWindow.loadURL('http://localhost:3000')
+  mainWindow.loadURL('http://localhost:3000/')
   mainWindow.show();
   // Open the DevTools.
   //mainWindow.webContents.openDevTools()

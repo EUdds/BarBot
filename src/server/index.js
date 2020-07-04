@@ -3,6 +3,7 @@ const app = express();
 const http = require('http');
 const SocketIO = require('socket.io');
 const gpio = require('rpi-gpio');
+const {Pump, createPumpsFromPinNumbers, getPumpByPumpNumber} = require('./Pump');
 
 const server = http.createServer(app);
 
@@ -13,42 +14,35 @@ io.listen(7000, (err) => {
 });
 
 io.httpServer.on('listening', function () {
-    console.log('listening on port', io.httpServer.address().port)
+    console.log('Socket.IO listening on port', io.httpServer.address().port)
 })
 
 
 const gpiop = gpio.promise;
 const webroot = __dirname + '/../';
 
-console.log('HERERE');
 app.use(express.static(webroot));
 
-const PUMP_1 = 7;
-const PUMP_2 = 11;
-const PUMP_3 = 13;
-const PUMP_4 = 15;
-const PUMP_5 = 12;
-const PUMP_6 = 16;
-/* TODO
-const PUMP_7 = 18;
-CONST PUMP_8 = 22;
-*/
+const PIN_NUMBERS = [7, 11, 13, 15, 12, 16, 18, 22];
 
-gpiop.setup(PUMP_1, gpio.DIR_HIGH);
+function main() {
+    createPumpsFromPinNumbers(PIN_NUMBERS);
+}
+
+
 io.sockets.on('connection', function(socket) {
-    let state = 'on';
-    gpio.write(PUMP_1, true);
+    let state = 'off';
 
     socket.on('state', function(data) {
-        state = data;
-        console.log(state);
-
+        pumpNumber = data[0];
+        state = data[1];
+        let pump = getPumpByPumpNumber(pumpNumber);
         if(state === 'on') {
-            gpio.write(PUMP_1, false);
+            pump.turnOn();
         } else if (state === 'off') {
-            gpio.write(PUMP_1, true);
+            pump.turnOff();
         } else {
-            gpio.write(PUMP_1, true);
+            pump.turnOff();
         }
     });
 });
@@ -60,4 +54,6 @@ process.on('SIGINT', function() {
     });
 });
 
-server.listen(8080, () => { console.log(`Listening on port 8080`)});
+server.listen(8080, () => { console.log(`HTTP Server listening on port 8080`)});
+
+main();

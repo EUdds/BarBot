@@ -1,0 +1,7 @@
+.Header {
+    height: 10%;
+    display: grid;
+    grid-template-columns: 10% 80%;
+    column-gap: 10px;
+    background-color: gray;
+}

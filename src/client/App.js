@@ -1,37 +1,32 @@
 /* eslint-disable react/jsx-filename-extension */
-import React, {Component} from 'react';
-import io from 'socket.io-client';
+import React, { Component } from 'react';
 import './App.css';
+import { Switch, Route, NavLink, BrowserRouter } from 'react-router-dom';
+import DebugMenu from './views/DebugMenu';
+import HomeScreen from './views/HomeScreen';
+import Header from './components/Header';
+
 
 class App extends Component {
-  componentDidMount() {
-    this.socket = io("http://127.0.0.1:7000");
-  }
-
-  onToggleOn = (event) => {
-    event.stopPropagation();
-    this.socket.emit('state', 'on');
-  }
-
-  onToggleOff = (event) => {
-      event.stopPropagation();
-      this.socket.emit('state', 'off');
-  }
-
   render() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>BarBotUI</h1>
-        <button className="btn"
-                onClick={(e) => this.onToggleOn(e)}
-        >On!</button>
-        <button className="btn"
-                onClick={(e) => this.onToggleOff(e)}
-        >Off!</button>
-      </header>
-    </div>
-  )};
+    return (
+      <BrowserRouter>
+        <div className="App">
+          <Header />
+          <div className="body">
+            <Switch>
+              <Route path="/debugMenu">
+                <DebugMenu />
+              </Route>
+              <Route path="/">
+                <HomeScreen />
+              </Route>
+            </Switch>
+          </div>
+        </div>
+      </BrowserRouter>
+    )
+  };
 }
 
 export default App;
