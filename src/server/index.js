@@ -1,11 +1,21 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
+const cors = require('cors');
 const http = require('http');
 const SocketIO = require('socket.io');
 const gpio = require('rpi-gpio');
 const {Pump, createPumpsFromPinNumbers, getPumpByPumpNumber} = require('./Pump');
 
 const server = http.createServer(app);
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(cors());
+app.use(bodyParser.json());
+
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+})
 
 const io = SocketIO(server);
 

@@ -1,7 +1,14 @@
 .Header {
     height: 10%;
     display: grid;
-    grid-template-columns: 10% 80%;
-    column-gap: 10px;
-    background-color: gray;
+    grid-template-columns: 1fr 3fr 1fr;
+    background-color: grey;
+}
+
+.left {
+    justify-self: start;
+}
+
+.right {
+    justify-self: end;
 }

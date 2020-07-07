@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { Component } from 'react';
 import './App.css';
-import { Switch, Route, NavLink, BrowserRouter } from 'react-router-dom';
+import { Switch, Route, NavLink, BrowserRouter, useLocation as Location } from 'react-router-dom';
 import DebugMenu from './views/DebugMenu';
 import HomeScreen from './views/HomeScreen';
 import Header from './components/Header';

@@ -1,2 +1,2 @@
 rem:
-	scp -r ./src pi@raspberrypi:~/barbotui/
+	scp -r ./src pi@barbot:~/Barbot/
