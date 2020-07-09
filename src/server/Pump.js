@@ -13,7 +13,9 @@ class Pump {
     }
 
     setupPin(pinNumber) {
-        gpiop.setup(this.pinNumber, gpio.DIR_HIGH);
+        gpiop.setup(this.pinNumber, gpio.DIR_HIGH).catch((e) => {
+            console.log('Error assigning pin  ' + pinNumber  + e);
+        })
     }
 
     turnOn() {

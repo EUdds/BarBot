@@ -5,6 +5,7 @@ import { Switch, Route, NavLink, BrowserRouter, useLocation as Location } from '
 import DebugMenu from './views/DebugMenu';
 import HomeScreen from './views/HomeScreen';
 import Header from './components/Header';
+import PumpsUpdate from './components/PumpsUpdate';
 
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
               <Route path="/debugMenu">
                 <DebugMenu />
               </Route>
+              <Route path="/pumps/update/:number" exact component={PumpsUpdate} />
               <Route path="/">
                 <HomeScreen />
               </Route>

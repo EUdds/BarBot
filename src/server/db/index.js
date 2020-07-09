@@ -1,3 +1,4 @@
-const mongoose = require('mongoose');
+const diskdb = require('diskdb');
+db = diskdb.connect(`${__dirname}/data`, ['pumps', 'fluids', 'drinks']);
 
-mongoose.connect('mongodb://localhost:27017/barbot')
+module.exports = db;

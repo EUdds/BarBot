@@ -1,2 +1,4 @@
+pullData:
+	scp -r pi@barbot:~/BarBot/src/server/db/data ./src/server/db/
 rem:
-	scp -r ./src pi@barbot:~/Barbot/
+	make pullData && scp -r ./src pi@barbot:~/BarBot/

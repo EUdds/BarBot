@@ -1,43 +1,59 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import io from 'socket.io-client';
 import './PumpControl.css'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import PumpsUpdate from './PumpsUpdate';
 export class PumpControl extends Component {
     constructor(props) {
         super(props);
         this.state = {
             endpoint: 'http://localhost:7000',
             pump: {
-                fluid: 'No Fluid Defined'
+                fluid: props.fluid,
+                number: props.number
             }
         };
         this.socket = io(this.state.endpoint);
-        this.state.pumpNumber = props.number;
     }
 
     onToggleOn = (event) => {
         event.stopPropagation();
-        this.socket.emit('state', [this.state.pumpNumber, 'on']);
-      }
-    
-      onToggleOff = (event) => {
-          event.stopPropagation();
-          this.socket.emit('state', [this.state.pumpNumber, 'off']);
-      }
+        this.socket.emit('state', [this.state.pump.number, 'on']);
+    }
+
+    onToggleOff = (event) => {
+        event.stopPropagation();
+        this.socket.emit('state', [this.state.pump.number, 'off']);
+    }
 
     render() {
         return <div className="pumpControl">
-            <p>Pump {this.props.number}</p>
+            <p>Pump {this.state.pump.number}</p>
             <p>Fluid: {this.state.pump.fluid}</p>
             <button className="btn"
                 onClick={(e) => this.onToggleOn(e)}
-        >On!</button>
-        <button className="btn"
+            >On!</button>
+            <button className="btn"
                 onClick={(e) => this.onToggleOff(e)}
-        >Off!</button>
-        <button className="btn">
-            <FontAwesomeIcon icon={['fas', 'edit']} style={{color: 'white'}} />
-        </button>
+            >Off!</button>
+            <UpdatePump number={this.state.pump.number} />
+
         </div>
+    }
+}
+
+class UpdatePump extends Component {
+    updateUser = event => {
+        event.preventDefault();
+        window.location.href = `/pumps/update/${this.props.number}`
+    }
+
+    render() {
+        return (
+            <button onClick={this.updateUser} className="btn">
+                <FontAwesomeIcon icon={['fas', 'edit']} style={{ color: 'white' }} />
+            </button>
+        )
     }
 }

@@ -5,13 +5,17 @@ const cors = require('cors');
 const http = require('http');
 const SocketIO = require('socket.io');
 const gpio = require('rpi-gpio');
+const db = require('./db');
 const {Pump, createPumpsFromPinNumbers, getPumpByPumpNumber} = require('./Pump');
 
+const pumpRouter = require('./db/routes/pump.router');
 const server = http.createServer(app);
 
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(cors());
+app.use(cors({origin: true, credentials: true}));
 app.use(bodyParser.json());
+app.use('/api', pumpRouter);
+
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
@@ -25,7 +29,7 @@ io.listen(7000, (err) => {
 
 io.httpServer.on('listening', function () {
     console.log('Socket.IO listening on port', io.httpServer.address().port)
-})
+});
 
 
 const gpiop = gpio.promise;
@@ -33,7 +37,7 @@ const webroot = __dirname + '/../';
 
 app.use(express.static(webroot));
 
-const PIN_NUMBERS = [7, 11, 13, 15, 12, 16, 18, 22];
+const PIN_NUMBERS = [7, 11, 13, 15, 12, 16, 18, 8];
 
 function main() {
     createPumpsFromPinNumbers(PIN_NUMBERS);

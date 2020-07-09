@@ -59,5 +59,6 @@
   },
   "devDependencies": {
     "electron-builder": "^22.7.0"
-  }
+  },
+  "nodemonConfig": { "ignore": [ "src/server/db/data/*" ] }
 }
