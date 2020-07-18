@@ -9,12 +9,16 @@ const db = require('./db');
 const {Pump, createPumpsFromPinNumbers, getPumpByPumpNumber} = require('./Pump');
 
 const pumpRouter = require('./db/routes/pump.router');
+const fluidRouter = require('./db/routes/fluids.router');
+const drinkRouter = require('./db/routes/drinks.router');
 const server = http.createServer(app);
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors({origin: true, credentials: true}));
 app.use(bodyParser.json());
 app.use('/api', pumpRouter);
+app.use('/api', fluidRouter);
+app.use('/api', drinkRouter)
 
 
 app.get('/', (req, res) => {

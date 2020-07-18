@@ -5,12 +5,9 @@ import ReactTable from 'react-table';
 // import 'react-table/react-table.css';
 import './DebugMenu.css'
 import { PumpControl } from '../components/PumpControl';
-import styled from 'styled-components';
+
 const ip = require('local-ipv4-address');
 
-const Wrapper = styled.div`
-    padding: 0 40px 40px 40px;
-`
 class DebugMenu extends Component {
   constructor(props) {
     super(props)
@@ -38,28 +35,8 @@ class DebugMenu extends Component {
   }
 
   render() {
-    const {pumps, isLoading} = this.state;
+    const {pumps} = this.state;
     console.log('TCL: PumpsList -> render -> pumps', pumps);
-    const columns = [
-      {
-        Header: 'Pump Number',
-        accessor: 'pumpNumber',
-      },
-      {
-        Header: 'Fluid',
-        accessor: 'fluid'
-      },
-      {
-        Header: 'Turn On'
-      },
-      {
-        Header: 'Turn Off'
-      }
-    ]
-    let showTable = true;
-    if (!this.state.pumps.length) {
-      showTable = false;
-    }
     return (
       <div className="App">
         <header className="Subheader">
@@ -70,17 +47,6 @@ class DebugMenu extends Component {
           <PumpControl number={pump.pumpNumber} fluid={pump.fluid} />
       ))}
         </div>
-        {/* <div className="buttonGrid">
-          <PumpControl number="0"></PumpControl>
-          <PumpControl number="1"></PumpControl>
-          <PumpControl number="2"></PumpControl>
-          <PumpControl number="3"></PumpControl>
-          <PumpControl number="4"></PumpControl>
-          <PumpControl number="5"></PumpControl>
-          <PumpControl number="6"></PumpControl>
-          <PumpControl number="7"></PumpControl>
-        </div>
-        <p>IP Address: {this.state.address}</p> */}
       </div>
     )
   };

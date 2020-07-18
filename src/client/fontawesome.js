@@ -2,12 +2,13 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 
 // import your icons
-import { faHome, faCog, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faCog, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
  faHome,
  faCog,
- faEdit
+ faEdit,
+ faPlus
 
   // more icons go here
 );

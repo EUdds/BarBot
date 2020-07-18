@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import io from 'socket.io-client';
 import './PumpControl.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import PumpsUpdate from './PumpsUpdate';
 export class PumpControl extends Component {
     constructor(props) {
         super(props);

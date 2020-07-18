@@ -19,12 +19,12 @@ createFluid = (req, res) => {
 function fluidExists(fluidName) {
     let knownFluids = db.fluids.find({});
     for(let fluid of knownFluids) {
-        if (fluid === fluidName) return true;
+        if (fluid.name === fluidName) return true;
     }
     return false;
 }
 
-deleteFluid = (req, res) {
+deleteFluid = (req, res) => {
     const body = req.body;
     if (!fluidExists(body.name)) return res.status(400).json({
         message: 'That fluid does not exist'

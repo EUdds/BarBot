@@ -10,12 +10,26 @@ export const updatePumpByPumpNumber = (pumpNumber, payload) => api.put('/pump/' 
 export const getPumpByPumpNumber = pumpNumber => api.get('/pump/' + pumpNumber);
 export const getPumpByFluid = fluid => api.get('/pump/' + fluid);
 
+export const insertFluid = payload => api.post('/fluid', payload);
+export const getAllFluids = () => api.get('/fluid');
+export const deleteFluid = payload => api.delete('/fluid', payload);
+
+export const insertDrink = payload => api.post('/drink', payload);
+export const getAllDrinks = () => api.get('/drink');
+export const getDrinksByIngredients = ingredients => api.get('/drink/?array=' + ingredients); 
+
 const apis = {
     insertPump,
     getAllPumps,
     updatePumpByPumpNumber,
     getPumpByPumpNumber,
-    getPumpByFluid
+    getPumpByFluid,
+    insertFluid,
+    getAllFluids,
+    deleteFluid,
+    insertDrink,
+    getAllDrinks,
+    getDrinksByIngredients
 }
 
 export default apis;
