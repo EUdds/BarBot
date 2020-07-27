@@ -1,12 +1,11 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { Component } from 'react';
 import api from '../api'
-import ReactTable from 'react-table';
 // import 'react-table/react-table.css';
 import './DebugMenu.css'
 import { PumpControl } from '../components/PumpControl';
 
-const ip = require('local-ipv4-address');
+// const ip = require('local-ipv4-address');
 
 class DebugMenu extends Component {
   constructor(props) {
