@@ -6,28 +6,41 @@ import DebugMenu from './views/DebugMenu';
 import HomeScreen from './views/HomeScreen';
 import Header from './components/Header';
 import PumpsUpdate from './views/PumpsUpdate';
+import ListDrinks from './views/ListDrinks';
+import CreateDrink from './views/CreateDrink';
+
+import CompanionCreateDrink from './companion/views/CreateDrink';
 
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div className="App">
-          <Header />
-          <div className="body">
-            <Switch>
+        <Switch>
+          <div className="App">
+            <Route path="/app/createDrink">
+              <CompanionCreateDrink />
+            </Route>
+            <div className="body">
               <Route path="/debugMenu">
+              <Header />
                 <DebugMenu />
               </Route>
-              <Route path="/pumps/update/:number" exact component={PumpsUpdate} />
-              
-              
-              <Route path="/">
-                <HomeScreen />
+              <Route path="/pumps/update/:number" exact>
+              <Header />
+              <PumpsUpdate />
               </Route>
-            </Switch>
+              <Route path="/drinks/create">
+              <Header />
+              <CreateDrink />
+              </Route>
+              <Route path="/" exact={true}>
+                <Header />
+                <ListDrinks />
+              </Route>
+            </div>
           </div>
-        </div>
+        </Switch>
       </BrowserRouter>
     )
   };

@@ -1,7 +1,8 @@
 import axios from 'axios';
+const config = require('../../../config');
 
 const api = axios.create({
-    baseURL: 'http://localhost:8080/api'
+    baseURL: 'http://'+ config.serverIp + ':8080/api'
 })
 
 export const insertPump = payload => api.post('/pump', payload);

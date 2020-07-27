@@ -60,6 +60,16 @@ getAllPumps = (req, res) => {
     return res.send(pumps);
 }
 
+getListOfCurrentFluids = (req, res) => {
+    let pumps = db.pumps.find();
+    console.log(pumps);
+    let fluids = [];
+    for(let pump of pumps) {
+        fluids.push(pump.fluid);
+    }
+    res.send([...new Set(fluids)]);
+}
+
 const router = express.Router();
 
 router.get('/pump', getAllPumps)
@@ -67,5 +77,6 @@ router.post('/pump', createPump);
 router.put('/pump/:number', updatePump);
 router.get('/pump/:number', getPumpByPumpNumber);
 router.get('/pump/fluid/:fluid', getPumpByFluid);
+router.get('/getActiveFluids', getListOfCurrentFluids);
 
 module.exports = router;

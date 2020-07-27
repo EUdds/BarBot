@@ -76,7 +76,7 @@ class PumpsUpdate extends React.Component {
                 ))}
                 <Modal show={this.state.showAddModal} handleClose={this.hideModal}>
                     <p>Add Drink</p>
-                    <input />
+                    <input type="text" />
                 </Modal>
                 <button onClick={this.showModal} className="mixerButton">
                     <FontAwesomeIcon icon={['fas', 'plus']} style={{color: 'white'}} />

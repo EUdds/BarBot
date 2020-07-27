@@ -12,6 +12,7 @@
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.3",
     "express": "^4.17.1",
+    "local-ip-url": "^1.0.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
@@ -60,5 +61,9 @@
   "devDependencies": {
     "electron-builder": "^22.7.0"
   },
-  "nodemonConfig": { "ignore": [ "src/server/db/data/*" ] }
+  "nodemonConfig": {
+    "ignore": [
+      "src/server/db/data/*"
+    ]
+  }
 }
