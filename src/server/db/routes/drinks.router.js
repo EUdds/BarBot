@@ -53,7 +53,7 @@ let getDrinksByIngredients = (req, res) => {
         for (let ingredient of drink.ingredients) {
             ingList.push(ingredient.name);
         }
-        const canMake = fluids.every(val => ingList.includes(val));
+        const canMake = ingList.every(val => fluids.includes(val));
         if (canMake) {
             possibleDrinks.push(drink);
         } 
