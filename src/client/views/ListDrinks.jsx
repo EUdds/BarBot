@@ -19,11 +19,19 @@ class ListDrinks extends React.Component {
 
   async componentWillMount() {
     let fluids = await api.getActiveFluids();
-    let possibleDrinks = await api.getDrinksByIngredients(fluids)
-    possibleDrinks = possibleDrinks.data;
-    console.log('Possible Drinks');
-    console.log(possibleDrinks);
-    this.setState({ drinks: possibleDrinks, drink: possibleDrinks[0], currIdx: 0 });
+    fluids = fluids.data;
+    let payload = {
+      array: fluids
+    };
+    api.getDrinksByIngredients(payload).then(possibleDrinks => {
+      possibleDrinks = possibleDrinks.data;
+      console.log(possibleDrinks);
+      console.log('Possible Drinks');
+      console.log(possibleDrinks);
+      this.setState({ drinks: possibleDrinks, drink: possibleDrinks[0], currIdx: 0 });
+    }).catch((err) => {
+      console.error(err);
+    })
 
   }
 

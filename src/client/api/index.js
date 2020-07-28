@@ -17,7 +17,7 @@ export const deleteFluid = payload => api.delete('/fluid', payload);
 
 export const insertDrink = payload => api.post('/drink', payload);
 export const getAllDrinks = () => api.get('/drink');
-export const getDrinksByIngredients = ingredients => api.get('/drink/?array=' + ingredients); 
+export const getDrinksByIngredients = ingredients => api.post('/drinks', ingredients); 
 
 const apis = {
     insertPump,

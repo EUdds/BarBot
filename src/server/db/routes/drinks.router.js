@@ -44,20 +44,25 @@ let updateDrink = (req, res) => {
 
 let getDrinksByIngredients = (req, res) => {
     let drinks = db.drinks.find();
-    let fluids = req.query.array;
+    let fluids = req.body.array;
     console.log(fluids);
+    let possibleDrinks = [];
     for(let drink of drinks) {
+        console.log(drink);
         let ingList = []
         for (let ingredient of drink.ingredients) {
             ingList.push(ingredient.name);
         }
         const canMake = fluids.every(val => ingList.includes(val));
-        if (!canMake) drinks.splice(drinks.indexOf(drink), 1);
+        if (canMake) {
+            possibleDrinks.push(drink);
+        } 
     }
-    return res.send(drinks);
+    return res.send(possibleDrinks);
 }
 
 let getAllDrinks = (req, res) => {
+    console.log('getting all drinks');
     let drinks = db.drinks.find({});
     return res.send(drinks);
 }
@@ -66,7 +71,7 @@ const router = express.Router();
 
 router.get('/drink', getAllDrinks)
 router.post('/drink', createDrink);
+router.post('/drinks', getDrinksByIngredients);
 router.put('/drink/:id', updateDrink);
-router.get('/drink/:ingredients', getDrinksByIngredients);
 
 module.exports = router;
