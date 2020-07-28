@@ -1,7 +1,7 @@
 const express = require('express');
 const db = require('../index');
 
-createDrink = (req, res) => {
+let createDrink = (req, res) => {
     const body = req.body;
     console.log('Adding drink');
     console.log(body);
@@ -11,8 +11,8 @@ createDrink = (req, res) => {
             error: 'You must provide a body'
         });
     }
-    body.name = body.fluid.toLowerCase();
-    if (drinkNumberExists(body.drinkNumber)) return res.status(400).json({
+    body.name = body.name.toLowerCase();
+    if (drinkExists(body.name)) return res.status(400).json({
         success: false,
         error: 'Drink already exists'
     })
@@ -29,7 +29,7 @@ function drinkExists(drinkName) {
     return false
 }
 
-updateDrink = (req, res) => {
+let updateDrink = (req, res) => {
     console.log(`Updating drink ${req.params.name}`)
     const body = req.body;
     if (!body) return res.status(400).json({
@@ -42,12 +42,22 @@ updateDrink = (req, res) => {
     res.status(200).json(db.drinks.findOne({'name': req.params.name}));
 }
 
-getDrinksByIngredients = (req, res) => {
-    let drink = db.drinks.find({'fluid': req.query.fluid});
-    return res.send(drink);
+let getDrinksByIngredients = (req, res) => {
+    let drinks = db.drinks.find();
+    let fluids = req.query.array;
+    console.log(fluids);
+    for(let drink of drinks) {
+        let ingList = []
+        for (let ingredient of drink.ingredients) {
+            ingList.push(ingredient.name);
+        }
+        const canMake = fluids.every(val => ingList.includes(val));
+        if (!canMake) drinks.splice(drinks.indexOf(drink), 1);
+    }
+    return res.send(drinks);
 }
 
-getAllDrinks = (req, res) => {
+let getAllDrinks = (req, res) => {
     let drinks = db.drinks.find({});
     return res.send(drinks);
 }

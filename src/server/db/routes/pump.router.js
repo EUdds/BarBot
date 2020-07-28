@@ -62,7 +62,6 @@ getAllPumps = (req, res) => {
 
 getListOfCurrentFluids = (req, res) => {
     let pumps = db.pumps.find();
-    console.log(pumps);
     let fluids = [];
     for(let pump of pumps) {
         fluids.push(pump.fluid);

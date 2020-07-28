@@ -2,6 +2,8 @@ import React from 'react';
 import api from '../api';
 import './PumpUpdate.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import Header from '../components/Header';
+import createFluidQR from '../img/createFluidQR.svg';
 
 class PumpsUpdate extends React.Component {
     constructor(props) {
@@ -58,11 +60,14 @@ class PumpsUpdate extends React.Component {
     }
 
     hideModal = () => {
+        window.location.reload(true);
         this.setState({showAddModal: false});
     }
 
     render() {
         return (
+            <div>
+            <Header />
             <div className="mixerGrid">
                 {this.state.fluids.map(fluid => (
 
@@ -75,13 +80,13 @@ class PumpsUpdate extends React.Component {
                     </button>
                 ))}
                 <Modal show={this.state.showAddModal} handleClose={this.hideModal}>
-                    <p>Add Drink</p>
-                    <input type="text" />
+                    <img src={createFluidQR} height="250px" width="250px" />
+                    <p>Scan to open the companion app</p>
                 </Modal>
                 <button onClick={this.showModal} className="mixerButton">
                     <FontAwesomeIcon icon={['fas', 'plus']} style={{color: 'white'}} />
-                    +
                 </button>
+            </div>
             </div>
         )
     }

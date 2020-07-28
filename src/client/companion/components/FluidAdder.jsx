@@ -8,23 +8,33 @@ class FluidAdder extends React.Component {
       fluid: this.props.name,
       inputName: this.props.name + "ing",
       numShots: 0,
+      onChange: this.props.onChange,
     };
   }
 
+  handleChange = event => {
+    const {fluid, numShots} = this.state;
+    this.state.onChange(fluid, numShots);
+  }
+
   subShot = () => {
-      if (this.state.numShots > 0)
-      this.setState({numShots: this.state.numShots - 1})
+      if (this.state.numShots > 0) {
+        this.handleChange();
+        this.setState({numShots: this.state.numShots - 1})
+      }
   }
 
   addShot = () => {
-      if (this.state.numShots < 10)
-    this.setState({numShots: this.state.numShots + 1})
+      if (this.state.numShots < 10) {
+        this.handleChange();
+        this.setState({numShots: this.state.numShots + 1})
+      }
 }
 
   render() {
     return (
         <div className="container">
-            <input name={this.state.inputName} readOnly={true} value={this.state.numShots}> shot(s)</input>
+            <p name={this.state.inputName} readOnly={true} value={this.state.numShots}> shot(s)</p>
             <p onClick={this.subShot}>-</p>
             <p>{this.state.fluid}</p>
             <p onClick={this.addShot}>+</p>

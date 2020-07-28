@@ -10,6 +10,7 @@ import ListDrinks from './views/ListDrinks';
 import CreateDrink from './views/CreateDrink';
 
 import CompanionCreateDrink from './companion/views/CreateDrink';
+import CompanionCreateFluid from './companion/views/CreateFluid';
 
 
 class App extends Component {
@@ -21,15 +22,15 @@ class App extends Component {
             <Route path="/app/createDrink">
               <CompanionCreateDrink />
             </Route>
+            <Route path="/app/createFluid">
+             <CompanionCreateFluid /> 
+            </Route>
             <div className="body">
               <Route path="/debugMenu">
               <Header />
                 <DebugMenu />
               </Route>
-              <Route path="/pumps/update/:number" exact>
-              <Header />
-              <PumpsUpdate />
-              </Route>
+              <Route path="/pumps/update/:number" component={PumpsUpdate} exact />
               <Route path="/drinks/create">
               <Header />
               <CreateDrink />
