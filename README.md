@@ -11,6 +11,10 @@ To start the process cd into the directory and run `npm start`
 
 Global packages Foreman and nodemon are expected.
 
+## Remote Developement
+
+To develop on your own machine on the network. Simply clone the repository to your computer to edit. Run the project on the raspberry pi so that react and express are listening for file changes. When ready to push changes run `make rem`
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
