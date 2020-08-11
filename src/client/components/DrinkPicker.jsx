@@ -13,7 +13,7 @@ class DrinkPicker extends React.Component {
         let ingredients = (typeof this.props.drink == "undefined") ? [{name: 'loading', shots: -1}] : this.props.drink.ingredients
         return (
             <div>
-                    <h2 className="capitalize">{drinkName}</h2>
+                    <h2 id="drinkTitle" className="capitalize">{drinkName}</h2>
                     <div className="list">
                         {ingredients.map(ingredient => (
                             <IngredientList ingredient={ingredient} />

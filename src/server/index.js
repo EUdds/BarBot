@@ -6,7 +6,7 @@ const http = require('http');
 const SocketIO = require('socket.io');
 const gpio = require('rpi-gpio');
 const db = require('./db');
-const {Pump, createPumpsFromPinNumbers, getPumpByPumpNumber} = require('./Pump');
+const {Pump, createPumpsFromPinNumbers, getPumpByPumpNumber, getPumpByFluidName} = require('./Pump');
 
 const pumpRouter = require('./db/routes/pump.router');
 const fluidRouter = require('./db/routes/fluids.router');
@@ -61,6 +61,19 @@ io.sockets.on('connection', function(socket) {
             pump.turnOff();
         } else {
             pump.turnOff();
+        }
+    });
+
+    socket.on('makeDrink', async function(data) {
+        let {drink, pos} = data;
+        let {ingredients} = drink;
+        for(let ingredient of ingredients) {
+            let pump = getPumpByFluidName(ingredient.name);
+            console.log(pump);
+            if (pump === -1) return; // TODO error handling
+            for(let i=0; i < ingredient.shots; i++) {
+                await pump.pourOneShot();
+            } 
         }
     });
 });

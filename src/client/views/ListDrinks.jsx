@@ -1,4 +1,5 @@
 import React from 'react';
+import io from 'socket.io-client';
 import api from '../api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import LeftArrow from '../img/arrow-left.svg';
@@ -9,10 +10,12 @@ class ListDrinks extends React.Component {
   constructor() {
     super();
     this.state = {
+      endpoint: 'http://localhost:7000',
       drinks: [],
       drink: { name: 'Loading', ingredients: [{ name: 'loading', numShots: -1 }] },
       currIdx: 0,
     };
+    this.socket = io(this.state.endpoint);
     this.previousDrink = this.previousDrink.bind(this);
     this.nextDrink = this.nextDrink.bind(this);
   }
@@ -25,8 +28,6 @@ class ListDrinks extends React.Component {
     };
     api.getDrinksByIngredients(payload).then(possibleDrinks => {
       possibleDrinks = possibleDrinks.data;
-      console.log(possibleDrinks);
-      console.log('Possible Drinks');
       console.log(possibleDrinks);
       this.setState({ drinks: possibleDrinks, drink: possibleDrinks[0], currIdx: 0 });
     }).catch((err) => {
@@ -68,6 +69,10 @@ class ListDrinks extends React.Component {
     window.location.href = `/drinks/create`;
   }
 
+  makeDrink = (event) => {
+    event.stopPropagation();
+    this.socket.emit('makeDrink', {drink: this.state.drink, pos: 0});
+  }
   render() {
     return (
       <>
@@ -84,15 +89,10 @@ class ListDrinks extends React.Component {
         </div>
         <div>
           <button onClick={this.createDrink}>+</button> 
+          <button onClick={this.makeDrink}>Make</button>
         </div>
       </>
     )
-  }
-
-  componentDidMount() {
-    this.setState({
-      someKey: 'otherValue'
-    });
   }
 }
 
