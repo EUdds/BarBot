@@ -6,9 +6,10 @@ const PUMPS = [];
 module.exports.PUMPS = PUMPS;
 
 class Pump {
-    constructor(pinNumber, fluid) {
+    constructor(pinNumber, fluid, shotDelay) {
         this.pinNumber = pinNumber;
         this.fluid = fluid;
+        this.shotDelay = shotDelay
         this.setupPin(pinNumber);
         PUMPS.push(this);
     }
@@ -30,10 +31,20 @@ class Pump {
     async pourOneShot(){
         let top = this;
         this.turnOn();
-        sleep(1100).then(() => {
+        sleep(1100).finally(() => {
             top.turnOff();
         })
     } // TODO
+
+    async pourShots(numShots) {
+        let top = this;
+        time = this.shotDelay * numShots;
+        this.turnOn();
+        sleep(time).finally(() => {
+            top.turnOff();
+        })
+        
+    }
 }
 
 module.exports = Pump;
@@ -42,9 +53,9 @@ const sleep = ms => {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-module.exports.createPumpsFromPinNumbers = (pinNumbers) => {
+module.exports.createPumpsFromPinNumbers = (pinNumbers, shotdelays) => {
     for(let i = 0; i < pinNumbers.length; i++) {
-        let pump = new Pump(pinNumbers[i], "Pump " + i);
+        let pump = new Pump(pinNumbers[i], "Pump " + i, shotdelays[i]);
     }
 }
 function getPumpByPumpNumber(pumpNumber) {

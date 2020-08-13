@@ -8,6 +8,8 @@ import LeftArrow from '../img/arrow-left.svg';
 import RightArrow from '../img/arrow-right.svg';
 import './ListDrinks.css';
 import DrinkPicker from '../components/DrinkPicker';
+import Header from '../components/Header';
+
 class ListDrinks extends React.Component {
   constructor() {
     super();
@@ -68,6 +70,39 @@ class ListDrinks extends React.Component {
     }
   }
 
+  render() {
+    return (
+      <div className="listContainer">
+        <Header />
+        <Swipe onSwipeLeft={this.previousDrink}
+          onSwipeRight={this.nextDrink}
+          allowMouseEvents={true} >
+          <div className="menu">
+            <p className="arrow-button-container">
+              <span className="helper"></span>
+              <img className="arrow-button"  src={LeftArrow} onClick={this.previousDrink} />
+            </p>
+            <div>
+              <DrinkPicker drink={this.state.drink} />
+            </div>
+            <p className="arrow-button-container">
+              <span className="helper"></span>
+              <img className="arrow-button"  src={RightArrow} onClick={this.previousDrink} />
+            </p>
+          </div>
+        </Swipe>
+        <div className="footer">
+        <Buttons  />
+        </div>
+      </div>
+    )
+  }
+}
+
+export default ListDrinks;
+
+class Buttons extends React.Component {
+  
   createDrink(event) {
     event.preventDefault();
     window.location.href = `/drinks/create`;
@@ -79,36 +114,16 @@ class ListDrinks extends React.Component {
   }
   render() {
     return (
-      <Swipe onSwipeLeft={this.previousDrink}
-        onSwipeRight={this.nextDrink}
-        allowMouseEvents={true} >
-        <div className="menu">
-          <p>
-            <img height="50" width="50" src={LeftArrow} onClick={this.previousDrink} />
-          </p>
-          <div>
-            <DrinkPicker drink={this.state.drink} />
-          </div>
-          <p>
-            <img height="50" width="50" src={RightArrow} onClick={this.nextDrink} />
-          </p>
+      <div className="actionGrid">
+        <div className="button">
+          <FontAwesomeIcon onClick={this.createDrink} icon={['fas', 'plus']} size="8x" style={{ color: 'black' }} />
+          <p>Add new Drink</p>
         </div>
-        <div className="footer">
-          <div className="actionGrid">
-            <div className="button">
-              <FontAwesomeIcon onClick={this.createDrink} icon={['fas', 'plus']} size="6x" style={{ color: 'black' }} />
-              <p>Add new Drink</p>
-            </div>
-            <div className="button">
-              <FontAwesomeIcon onClick={this.makeDrink} icon={['fas', 'beer']} size="6x" />
-              <p>Pour Drink</p>
-            </div>
-            {/* <button onClick={this.makeDrink}>Make</button> */}
-          </div>
+        <div className="button">
+          <FontAwesomeIcon onClick={this.makeDrink} icon={['fas', 'beer']} size="8x" />
+          <p>Pour Drink</p>
         </div>
-      </Swipe>
+      </div>
     )
   }
 }
-
-export default ListDrinks;

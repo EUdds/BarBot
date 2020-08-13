@@ -42,9 +42,10 @@ const webroot = __dirname + '/../';
 app.use(express.static(webroot));
 
 const PIN_NUMBERS = [7, 11, 13, 15, 12, 16, 18, 8];
+const SHOT_DELAYS = [1200, 1200, 1200, 1200, 1200, 1200, 1200, 1200]
 
 function main() {
-    createPumpsFromPinNumbers(PIN_NUMBERS);
+    createPumpsFromPinNumbers(PIN_NUMBERS, SHOT_DELAYS);
 }
 
 
@@ -64,7 +65,7 @@ io.sockets.on('connection', function(socket) {
         }
     });
 
-    socket.on('makeDrink', async nufunction(data) {
+    socket.on('makeDrink', async function(data) {
         let {drink, pos} = data;
         let {ingredients} = drink;
         for(let ingredient of ingredients) {

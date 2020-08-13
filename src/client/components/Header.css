@@ -1,8 +1,8 @@
 .Header {
-    height: 8%;
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
     background-color: grey;
+    padding: 2px;
 }
 
 .left {

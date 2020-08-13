@@ -13,7 +13,7 @@ class CreateDrink extends React.Component {
   render() {
     return (
       <>
-    <img src={qrCode} />
+    <img height="35%" width="35%" src={qrCode} />
     <h2>Scan with your phone to go to the companion app</h2>
     </>
     )

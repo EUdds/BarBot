@@ -36,7 +36,6 @@ class App extends Component {
               <CreateDrink />
               </Route>
               <Route path="/" exact={true}>
-                <Header />
                 <ListDrinks />
               </Route>
             </div>

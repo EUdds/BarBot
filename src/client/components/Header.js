@@ -8,17 +8,10 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: 'No Title Set'
+      title: "TODO"
     }
-    this.state.title = window.location.href;
-  }
-  componentDidMount() {
-    this.state.title = window.location.href;
   }
 
-  componentDidUpdate() {
-    this.state.title = window.location.href
-  }
   render() {
     return (
           <header className="Header">
