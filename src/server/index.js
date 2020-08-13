@@ -64,7 +64,7 @@ io.sockets.on('connection', function(socket) {
         }
     });
 
-    socket.on('makeDrink', async function(data) {
+    socket.on('makeDrink', async nufunction(data) {
         let {drink, pos} = data;
         let {ingredients} = drink;
         for(let ingredient of ingredients) {
