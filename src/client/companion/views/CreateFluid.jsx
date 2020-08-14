@@ -42,7 +42,6 @@ class CreateFluid extends React.Component {
         return (
             <>
                 <div className="createFluidContainer">
-
                     <h1>Create New Ingredient</h1>
                     <form onSubmit={this.handleSubmit} className="fluidGrid">
                         <p>
