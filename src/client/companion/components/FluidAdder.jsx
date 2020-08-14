@@ -32,12 +32,19 @@ class FluidAdder extends React.Component {
 }
 
   render() {
+    let s = this.state.numShots > 1 ? "s" : "";
+    let indicator;
+    if (this.state.numShots > 0) {
+      indicator = (<p>{this.state.numShots} shot{s}</p>)
+    } else {
+      indicator = (<p>N/A</p>)
+    }
     return (
         <div className="container">
-            <p name={this.state.inputName} readOnly={true} value={this.state.numShots}> shot(s)</p>
-            <p onClick={this.subShot}>-</p>
+           {indicator}
+            <p class="faButton" onClick={this.subShot}>-</p>
             <p>{this.state.fluid}</p>
-            <p onClick={this.addShot}>+</p>
+            <p  class="faButton" onClick={this.addShot}>+</p>
         </div>
     )
   }

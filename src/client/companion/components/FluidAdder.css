@@ -1,5 +1,10 @@
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr 2fr 1fr;
-    
+
+}
+
+.faButton {
+    font-size: 20px;
+    font-weight: bolder;
 }

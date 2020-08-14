@@ -1,0 +1,12 @@
+.fluidGrid {
+    display: grid;
+    grid-template-rows: 1fr 0.25fr 1fr auto;
+    gap: 1%;
+}
+
+.createFluidContainer {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    padding: 2%
+}
+

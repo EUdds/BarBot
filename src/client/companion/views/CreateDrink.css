@@ -1,0 +1,47 @@
+.createDrinkGrid {
+    display: grid;
+    grid-template-rows: auto 2fr auto;
+    min-height: 98vh;
+    padding: 2%;
+}
+
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#make {
+    background-color: #AE4CAA;
+}
+
+#saveAndMake {
+    background-color: #4CAAAE;
+}
+
+#save {
+    background-color: #4CAF50;
+}
+
+
+.button {
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.buttonGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.createInput {
+    border: 2px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 8px 0;
+    padding: 12px 20px;
+}

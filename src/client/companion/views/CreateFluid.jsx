@@ -1,6 +1,8 @@
 import React from 'react';
 import api from '../api';
 
+import './CreateFluid.css'
+
 class CreateFluid extends React.Component {
     constructor() {
         super();
@@ -11,22 +13,22 @@ class CreateFluid extends React.Component {
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    
+
     handleNameChange = event => {
-        this.setState({name: event.target.value});
+        this.setState({ name: event.target.value });
     }
 
     handleMixerChange = event => {
-        this.setState({isMixer: event.target.checked});
+        this.setState({ isMixer: event.target.checked });
     }
 
     handleCategoryChange = event => {
-        this.setState({category: event.target.value});
+        this.setState({ category: event.target.value });
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
-        let {name, isMixer, category} = this.state;
+        let { name, isMixer, category } = this.state;
         let payload = {
             name: name,
             isMixer: isMixer,
@@ -39,16 +41,25 @@ class CreateFluid extends React.Component {
     render() {
         return (
             <>
-            <h1>Create New Ingredient</h1>
-            <form onSubmit={this.handleSubmit}>
-                <label>Ingredient Name</label>
-                <input onChange={this.handleNameChange} type="text" required={true} />
-                <label>Is Mixer</label>
-                <input onChange={this.handleMixerChange} type="checkbox" />
-                <label>Category</label>
-                <input onChange={this.handleCategoryChange} type="text" required={true} />
-                <button type="submit">Create new Ingredient</button>
-            </form>
+                <div className="createFluidContainer">
+
+                    <h1>Create New Ingredient</h1>
+                    <form onSubmit={this.handleSubmit} className="fluidGrid">
+                        <p>
+                            <label>Ingredient Name</label>
+                            <input className="createInput" onChange={this.handleNameChange} type="text" required={true} />
+                        </p>
+                        <p>
+                            <label>Is Mixer</label>
+                            <input onChange={this.handleMixerChange} type="checkbox" />
+                        </p>
+                        <p>
+                            <label>Category</label>
+                            <input className="createInput" onChange={this.handleCategoryChange} type="text" required={true} />
+                        </p>
+                        <button id="save" className="button" type="submit">Create new Ingredient</button>
+                    </form>
+                </div>
             </>
         )
     }
