@@ -62,12 +62,6 @@ class CreateFluid extends React.Component {
             </>
         )
     }
-
-    componentDidMount() {
-        this.setState({
-            someKey: 'otherValue'
-        });
-    }
 }
 
 export default CreateFluid;

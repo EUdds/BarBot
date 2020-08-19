@@ -5,12 +5,23 @@ const cors = require('cors');
 const http = require('http');
 const SocketIO = require('socket.io');
 const gpio = require('rpi-gpio');
+const ClientStream = require('openpixelcontrol-stream').OpcClientStream;
+const net = require('net');
+
+const NUM_LEDS = 12;
+const OPC_CHANNEL = 0;
+const LED_PORT = 7890
+
+const ledClient = new ClientStream();
+
+
+
 const db = require('./db');
 const {Pump, createPumpsFromPinNumbers, getPumpByPumpNumber, getPumpByFluidName} = require('./Pump');
 
-const pumpRouter = require('./db/routes/pump.router');
-const fluidRouter = require('./db/routes/fluids.router');
-const drinkRouter = require('./db/routes/drinks.router');
+const pumpRouter = require('./http_socket/db/routes/pump.router');
+const fluidRouter = require('./http_socket/db/routes/fluids.router');
+const drinkRouter = require('./http_socket/db/routes/drinks.router');
 const server = http.createServer(app);
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -46,6 +57,7 @@ const SHOT_DELAYS = [1200, 1200, 1200, 1200, 1200, 1200, 1200, 1200]
 
 function main() {
     createPumpsFromPinNumbers(PIN_NUMBERS, SHOT_DELAYS);
+    setLedsToState("idle");
 }
 
 
@@ -53,6 +65,10 @@ io.sockets.on('connection', function(socket) {
     let state = 'off';
 
     socket.on('state', function(data) {
+        const ledSocket = net.createConnection(LED_PORT, 'localhost', function() {
+            ledClient.pipe(ledSocket);
+            ledClient.setPixelColors(OPC_CHANNEL, new Uint32Array(NUM_LEDS));
+        });
         pumpNumber = data[0];
         state = data[1];
         let pump = getPumpByPumpNumber(pumpNumber);
@@ -87,5 +103,12 @@ process.on('SIGINT', function() {
 });
 
 server.listen(8080, () => { console.log(`HTTP Server listening on port 8080`)});
+
+function setLedsToState(state) {
+    switch (state) {
+        case "idle":
+            
+    }
+}
 
 main();

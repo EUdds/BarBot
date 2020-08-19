@@ -92,7 +92,7 @@ class ListDrinks extends React.Component {
           </div>
         </Swipe>
         <div className="footer">
-        <Buttons  />
+        <Buttons socket={this.socket} drink={this.state.drink}  />
         </div>
       </div>
     )
@@ -102,6 +102,11 @@ class ListDrinks extends React.Component {
 export default ListDrinks;
 
 class Buttons extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.socket = this.props.socket;
+  }
   
   createDrink(event) {
     event.preventDefault();
@@ -110,17 +115,18 @@ class Buttons extends React.Component {
 
   makeDrink = (event) => {
     event.stopPropagation();
-    this.socket.emit('makeDrink', { drink: this.state.drink, pos: 0 });
+    this.socket.emit('makeDrink', { drink: this.props.drink, pos: 0 });
   }
   render() {
     return (
       <div className="actionGrid">
         <div className="button">
-          <FontAwesomeIcon onClick={this.createDrink} icon={['fas', 'plus']} size="8x" style={{ color: 'black' }} />
+          <FontAwesomeIcon onClick={this.createDrink} icon={['fas', 'plus']} size="6x" style={{ color: 'black' }} />
           <p>Add new Drink</p>
         </div>
         <div className="button">
-          <FontAwesomeIcon onClick={this.makeDrink} icon={['fas', 'beer']} size="8x" />
+          {/* <FontAwesomeIcon onClick={this.makeDrink} icon={['fas', 'beer']} size="8x" /> */}
+          <FontAwesomeIcon onClick={this.makeDrink} icon={['fas', 'beer']} size="6x" style={{color: 'black'}} />
           <p>Pour Drink</p>
         </div>
       </div>

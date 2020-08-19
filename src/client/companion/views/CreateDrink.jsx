@@ -78,7 +78,7 @@ class CreateDrink extends React.Component {
             </div>
           </p>
     
-          <p className="buttonGrid">
+          <p className="submitGrid">
             <button id="make" className="button disabled" type="button">Make</button>
             <button id="save" className="button" onClick={this.onSubmit} type="submit">Save</button>
             <button id="saveAndMake" className="button disabled" type="button">Save and Make</button>
