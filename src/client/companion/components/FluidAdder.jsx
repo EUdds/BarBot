@@ -43,16 +43,13 @@ class FluidAdder extends React.Component {
         <div className="container">
            {indicator}
             <p class="faButton" onClick={this.subShot}>-</p>
-            <p>{this.state.fluid}</p>
+            <p>{this.props.name}</p>
             <p  class="faButton" onClick={this.addShot}>+</p>
         </div>
     )
   }
 
   componentDidMount() {
-    this.setState({
-      someKey: 'otherValue'
-    });
   }
 }
 

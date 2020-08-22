@@ -1,24 +1,28 @@
-const NUM_LEDS = 12;
-const PORT = 7890;
+const http = require('http');
+const PORT = 5000;
 
+function setLedsToState(state) {
+    let colors = ["red", "green", "blue", "yellow", "reset"]
+    let color = colors[-1];
+    switch (state) {
+        case "idle":
+            color = colors[1]
+            break;
+        case "pouring":
+            color = colors[0]
+            break;
+        default:
+            color = colors[-1];
+    }
+    try {
+        http.get(`http://localhost:${PORT}/${color}`).on('error', () => {
+            console.log('[ERROR] Can not connect to LED Server');
+        })
+    } catch (err) {
+        console.log('[ERROR] Can not connect to LED Server');
+    }
+    
 
-var ParseStream = require('openpixelcontrol-stream').OpcParseStream,
-    net = require('net'),
-    ws281x = require('rpi-ws281x-native');
+}
 
-
-var server = net.createServer(function(conn) {
-    var parser = new ParseStream({
-        channel: 1,
-        dataFormat: ParseStream.DataFormat.UINT32_ARRAY
-    });
-
-    parser.on('setpixelcolors', function(data) {
-        ws281x.render(data);
-    });
-
-    conn.pipe(parser);
-});
-
-ws281x.init(NUM_LEDS);
-server.listen(PORT);
+module.exports.setLEDsToState = setLedsToState

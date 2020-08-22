@@ -33,6 +33,10 @@ class DebugMenu extends Component {
     // });
   }
 
+  reload() {
+    window.location.reload(true);
+  }
+
   render() {
     const {pumps} = this.state;
     console.log('TCL: PumpsList -> render -> pumps', pumps);
@@ -45,6 +49,9 @@ class DebugMenu extends Component {
       {this.state.pumps.map(pump => (
           <PumpControl number={pump.pumpNumber} fluid={pump.fluid} />
       ))}
+        </div>
+        <div className="utils">
+          <button class="btn" onClick={this.reload}>Force Reload</button>
         </div>
       </div>
     )

@@ -2,14 +2,14 @@
 *Author: Eric Udlis*
 
 This is the UI for my Automatic Bartending Robot project. 
-It's backend is an express webserver running diskdb (NoSQL version of squlite) to have non-volitile file storage.
+It's backend is an express webserver running diskdb (NoSQL version of SQLite) to have non-volitile file storage.
 It's frontend is a react app running on electron.
 
 This has libraries meant to interface with a Raspberry pi and will not run unless RPI gpio is present.
 
 To start the process cd into the directory and run `npm start`
 
-Global packages Foreman and nodemon are expected.
+Global packages `Foreman` and `nodemon` are expected as well as `Python3` and `pip3`.
 
 ## Remote Developement
 

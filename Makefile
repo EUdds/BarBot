@@ -1,4 +1,4 @@
 pullData:
-	scp -r pi@barbot:~/BarBot/src/server/db/data ./src/server/db/
+	scp -r pi@barbot:~/BarBot/src/server/http_socket/db/data ./src/server/http_socket/db/
 rem:
 	make pullData && scp -r ./src pi@barbot:~/BarBot/

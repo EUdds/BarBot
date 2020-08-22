@@ -1,3 +1,6 @@
-# LED Server for Barbot
+# BarBot UI Python Flask Server
+*Author: Eric Udlis*
 
-This is a seperate driver to run neopixels on the raspberry pi. Instead of opening a HTTP server with root access this LED driver is to be run seperately using `sudo`. Then communicate using a local connection
+This is a seperate driver to run neopixels on the raspberry pi. Instead of elevating the entire BarBot process, this webserver runs with sudo access to drive the neopixels.
+
+To start the server run `sudo FLASK_APP=/path/to/project/BarBot/src/server/led_server/app.py flask run`

@@ -1,6 +1,7 @@
 const gpio = require('rpi-gpio');
 const gpiop = gpio.promise;
 const db = require('./db/index');
+const ledDriver = require('../led_server')
 
 const PUMPS = [];
 module.exports.PUMPS = PUMPS;
@@ -37,12 +38,18 @@ class Pump {
     } // TODO
 
     async pourShots(numShots) {
-        let top = this;
-        time = this.shotDelay * numShots;
-        this.turnOn();
-        sleep(time).finally(() => {
-            top.turnOff();
-        })
+        let pump = this;
+        return new Promise(function(resolve, reject) {
+           
+            console.log('POURING ' + numShots + ' SHOTS');
+            let time = pump.shotDelay * numShots;
+            pump.turnOn();
+            sleep(time).finally(() => {
+                pump.turnOff();
+                resolve();
+            }).catch((err) => reject(err));
+        });
+
         
     }
 }

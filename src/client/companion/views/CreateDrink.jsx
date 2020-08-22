@@ -8,7 +8,7 @@ class CreateDrink extends React.Component {
   constructor() {
     super();
     this.state = {
-      fluids: ['1', '2', '3','4', '5', '6', '7', '8'],
+      fluids: [],
       drinkList: [],
       shotList: [],
       name: '',
@@ -88,7 +88,7 @@ class CreateDrink extends React.Component {
     )
   }
 
-  componentDidMount() {
+  componentWillMount() {
     api.getActiveFluids().then(res => {
       console.log(res);
       let numFluids = res.data.length;
@@ -96,7 +96,7 @@ class CreateDrink extends React.Component {
         fluids: res.data,
         shotList: new Array(numFluids).fill(0)
       });
-    })
+    });
   }
 }
 
