@@ -3,11 +3,11 @@
 
 This is the UI for my Automatic Bartending Robot project. 
 
-It's backend is an express webserver running diskdb (NoSQL version of SQLite) to have non-volitile file storage. The backend also includes a Python Flask webserver to drive WS2812 Neopixels.
+It's backend is an Express webserver running diskdb (NoSQL version of SQLite) to have non-volatile file storage. The backend also includes a Python Flask webserver to drive WS2812 Neopixels.
 
-It's frontend is a React app development server being shown using an electron window.
+It's frontend is a React app development server being shown using an Electron window.
 
-This has libraries meant to interface with a Raspberry pi and will not run unless RPI gpio is present.
+This has libraries meant to interface with a Raspberry Pi and will not run unless RPI gpio is present.
 
 Global packages `Foreman` and `nodemon` are expected as well as `Python3` and `pip3`.
 
@@ -18,9 +18,9 @@ To start the process cd into the directory and run `npm start`
 
 This project uses Foreman to spin up all 4 processes at once. I suggest setting up a way to run this command on startup. I use `PM2` to start this service on boot.
 
-## Remote Developement
+## Remote Development
 
-To develop on your own machine on the network. Simply clone the repository to your computer to edit. Run the project on the raspberry pi so that react and express are listening for file changes. When ready to push changes run `make rem`
+To develop on your own machine on the network. Simply clone the repository to your computer to edit. Run the project on the Raspberry Pi so that React and Express are listening for file changes. When ready to push changes run `make rem`
 
 ## Future Plans
 - Some sort of transaction per drink (venmo, cashapp, paypal)
