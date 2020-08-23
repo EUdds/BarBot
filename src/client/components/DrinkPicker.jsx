@@ -10,8 +10,8 @@ class DrinkPicker extends React.Component {
     }
 
     render() {
-        let drinkName = (typeof this.props.drink == "undefined") ? "Loading" : this.props.drink.name;
-        let ingredients = (typeof this.props.drink == "undefined") ? [{name: 'loading', shots: -1}] : this.props.drink.ingredients
+        let drinkName = (typeof this.props.drink === "undefined") ? "Loading" : this.props.drink.name;
+        let ingredients = (typeof this.props.drink === "undefined") ? [{name: 'loading', shots: -1}] : this.props.drink.ingredients
         return (
             <div>
                     <h2 id="drinkTitle" className="capitalize">{drinkName}</h2>
