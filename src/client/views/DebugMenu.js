@@ -21,9 +21,10 @@ class DebugMenu extends Component {
     let top = this;
     this.setState({isLoading: true});
     await api.getAllPumps().then(pumps => {
-      console.log(pumps.data)
+      let sortedPumps = this.sortPumps(pumps.data);
+      
       top.setState({
-        pumps: pumps.data,
+        pumps: sortedPumps,
         isLoading: false
       })
     }).catch((e) => console.error('Can not get pumps ' + e));
@@ -37,21 +38,34 @@ class DebugMenu extends Component {
     window.location.reload(true);
   }
 
+  sortPumps(pumps) {
+    let sortedPumps = [];
+    for(let i=0; i < pumps.length; i++) {
+      let pumpNumber = pumps[i].pumpNumber;
+      sortedPumps[pumpNumber] = pumps[i];
+    }
+    return sortedPumps;
+  } 
+
   render() {
     const {pumps} = this.state;
     console.log('TCL: PumpsList -> render -> pumps', pumps);
     return (
       <div className="App">
         <header className="Subheader">
-          <h1>Debug Control</h1>
+          <h1>Settings</h1>
         </header>
         <div className="buttonGrid">
       {this.state.pumps.map(pump => (
           <PumpControl number={pump.pumpNumber} fluid={pump.fluid} />
       ))}
         </div>
+        <br />
+        <header className="Subheader">
+          <h1>Utilities</h1>
+        </header>
         <div className="utils">
-          <button class="btn" onClick={this.reload}>Force Reload</button>
+          <button class="overfill-btn btn" onClick={this.reload}>Force Reload</button>
         </div>
       </div>
     )

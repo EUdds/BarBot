@@ -28,11 +28,11 @@ export class PumpControl extends Component {
     render() {
         return <div className="pumpControl">
             <p>Pump {this.state.pump.number}</p>
-            <p>Fluid: {this.state.pump.fluid}</p>
-            <button className="btn"
+            <p><b>Fluid:</b> {this.state.pump.fluid}</p>
+            <button className="btn btn-icon"
                 onClick={(e) => this.onToggleOn(e)}
             >On!</button>
-            <button className="btn"
+            <button className="btn btn-icon"
                 onClick={(e) => this.onToggleOff(e)}
             >Off!</button>
             <UpdatePump number={this.state.pump.number} />
@@ -49,7 +49,7 @@ class UpdatePump extends Component {
 
     render() {
         return (
-            <button onClick={this.updateUser} className="btn">
+            <button onClick={this.updateUser} className="btn btn-icon">
                 <FontAwesomeIcon icon={['fas', 'edit']} style={{ color: 'white' }} />
             </button>
         )

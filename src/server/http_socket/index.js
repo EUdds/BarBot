@@ -5,9 +5,8 @@ const cors = require('cors');
 const http = require('http');
 const SocketIO = require('socket.io');
 const gpio = require('rpi-gpio');
+
 const ledDriver = require('../led_server/');
-
-
 
 const db = require('./db');
 const {Pump, createPumpsFromPinNumbers, getPumpByPumpNumber, getPumpByFluidName} = require('./Pump');
@@ -16,18 +15,19 @@ const pumpRouter = require('./db/routes/pump.router');
 const fluidRouter = require('./db/routes/fluids.router');
 const drinkRouter = require('./db/routes/drinks.router');
 
-app.use('/api', pumpRouter);
-app.use('/api', fluidRouter);
-app.use('/api', drinkRouter);
-
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors({origin: true, credentials: true}));
 app.use(bodyParser.json());
 
+app.use('/api', pumpRouter);
+app.use('/api', fluidRouter);
+app.use('/api', drinkRouter);
 
+
+const server = http.createServer(app);
+server.listen(8080, () => { console.log(`HTTP Server listening on port 8080`)});
 
 const io = SocketIO(server);
-
 io.listen(7000, (err) => {
     console.log(err);
 });
@@ -35,10 +35,6 @@ io.listen(7000, (err) => {
 io.httpServer.on('listening', function () {
     console.log('Socket.IO listening on port', io.httpServer.address().port)
 });
-
-const server = http.createServer(app);
-server.listen(8080, () => { console.log(`HTTP Server listening on port 8080`)});
-
 
 const webroot = __dirname + '/../';
 

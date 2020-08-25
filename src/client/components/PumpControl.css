@@ -1,6 +1,10 @@
 .pumpControl {
     width: auto;
-    height: auto;
+    height: fit-content;
+    display: grid;
+    grid-template-rows: 20px 40px 75px 75px 75px;
+    gap: 2px;
+    
 }
 
 .btn {
@@ -11,7 +15,6 @@
     border: 0;
     margin: 10px auto;
     color: #fff;
-    font-size: 2.5rem;
     -webkit-user-select: none;  /* Chrome all / Safari all */
     -moz-user-select: none;     /* Firefox all */
     -ms-user-select: none;      /* IE 10+ */
@@ -22,5 +25,9 @@
   
   .btn:hover {
     background-color: #999;
+  }
+
+  .btn-icon {
+    font-size: 2.5rem;
   }
   
