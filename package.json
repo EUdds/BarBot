@@ -12,7 +12,7 @@
     "axios": "^0.19.2",
     "cors": "^2.8.5",
     "diskdb": "^0.1.17",
-    "electron": "^9.0.5",
+    "electron": "^15.5.5",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
